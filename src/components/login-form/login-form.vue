@@ -43,8 +43,8 @@ export default {
   data () {
     return {
       form: {
-        userName: 'admin',
-        password: '1qaz.2wsx'
+        userName: 'super_admin',
+        password: ''
       }
     }
   },

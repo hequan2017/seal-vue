@@ -2,7 +2,7 @@ export default {
   /**
    * @description 配置显示在浏览器标签的title
    */
-  title: 'seal-vue 海豹 vue前端',
+  title: 'seal-vue 海豹 admin',
   /**
    * @description token在Cookie中存储的天数，默认1天
    */
