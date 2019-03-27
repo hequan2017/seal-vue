@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 // import { Spin } from 'iview'
+import { getToken } from '@/libs/util'
 const addErrorLog = errorInfo => {
   const { statusText, status, request: { responseURL } } = errorInfo
   let info = {
@@ -23,6 +24,9 @@ class HttpRequest {
       headers: {
         //
       }
+    }
+    if (getToken()) {
+      config.headers['Authorization'] = `token ${getToken()}`
     }
     return config
   }

@@ -8,7 +8,7 @@
       <Card icon="log-in" title="欢迎登录" :bordered="false">
         <div class="form-con">
           <login-form @on-success-valid="handleSubmit"></login-form>
-          <p class="login-tip">输入任意用户名和密码即可</p>
+          <p class="login-tip">请输入账户密码</p>
         </div>
       </Card>
     </div>
@@ -33,7 +33,11 @@ export default {
           this.$router.push({
             name: this.$config.homeName
           })
+        }).catch(err => {
+          this.$Message.error(`获取个人信息错误 ${err}`)
         })
+      }).catch(err => {
+        this.$Message.error(`登录错误 ${err}`)
       })
     }
   }

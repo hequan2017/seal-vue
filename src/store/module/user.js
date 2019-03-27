@@ -13,11 +13,7 @@ export default {
     token: getToken(),
     access: '',
     hasGetInfo: false,
-    unreadCount: 0,
-    messageUnreadList: [],
-    messageReadedList: [],
-    messageTrashList: [],
-    messageContentStore: {}
+    unreadCount: 0
   },
   mutations: {
     setAvatar (state, avatarPath) {
@@ -38,33 +34,9 @@ export default {
     },
     setHasGetInfo (state, status) {
       state.hasGetInfo = status
-    },
-    setMessageCount (state, count) {
-      state.unreadCount = count
-    },
-    setMessageUnreadList (state, list) {
-      state.messageUnreadList = list
-    },
-    setMessageReadedList (state, list) {
-      state.messageReadedList = list
-    },
-    setMessageTrashList (state, list) {
-      state.messageTrashList = list
-    },
-    updateMessageContentStore (state, { msg_id, content }) {
-      state.messageContentStore[msg_id] = content
-    },
-    moveMsg (state, { from, to, msg_id }) {
-      const index = state[from].findIndex(_ => _.msg_id === msg_id)
-      const msgItem = state[from].splice(index, 1)[0]
-      msgItem.loading = false
-      state[to].unshift(msgItem)
     }
   },
   getters: {
-    messageUnreadCount: state => state.messageUnreadList.length,
-    messageReadedCount: state => state.messageReadedList.length,
-    messageTrashCount: state => state.messageTrashList.length
   },
   actions: {
     // 登录
@@ -86,7 +58,8 @@ export default {
     // 退出登录
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
+        logout(state.token).then((res) => {
+          console.log('退出', res)
           commit('setToken', '')
           commit('setAccess', [])
           resolve()
