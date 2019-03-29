@@ -3,6 +3,7 @@
     <Card>
       <Row>
         <Button @click="add"
+                v-if="addAccessAll"
                 type="primary">添加</Button>&nbsp;
         <Input v-model="hostname_search"
                placeholder="主机名"
@@ -149,7 +150,7 @@
 
 <script>
 import { getEcsList, createEcs, updateEcs, deleteEcs } from '@/api/assets'
-
+import { hasOneOf } from '@/libs/tools'
 export default {
   data () {
     return {
@@ -227,7 +228,8 @@ export default {
                   size: 'small'
                 },
                 style: {
-                  marginRight: '5px'
+                  marginRight: '5px',
+                  display: (this.updateAccessAll !== true) ? 'none' : 'inline-block'
                 },
                 on: {
                   click: () => {
@@ -239,6 +241,10 @@ export default {
                 props: {
                   type: 'error',
                   size: 'small'
+                },
+                style: {
+                  marginRight: '5px',
+                  display: (this.deleteAccessAll !== true) ? 'none' : 'inline-block'
                 },
                 on: {
                   click: () => {
@@ -307,6 +313,20 @@ export default {
   created () {
     this.get_ecs_list()
   },
+  computed: {
+    access () {
+      return this.$store.state.user.access
+    },
+    addAccessAll () {
+      return hasOneOf(['assets.add_ecs'], this.access)
+    },
+    updateAccessAll () {
+      return hasOneOf(['assets.change_ecs'], this.access)
+    },
+    deleteAccessAll () {
+      return hasOneOf(['assets.delete_ecs'], this.access)
+    }
+  },
   methods: {
     search () {
       console.log(this.hostname_search)
@@ -356,6 +376,7 @@ export default {
             updateEcs(this.updateId, this.formData).then(res => {
               console.log(res)
               this.$Message.success('更新 ecs 成功!')
+              this.create = false
             }).catch(err => {
               console.log(err.response)
               this.$Message.error({
@@ -402,6 +423,12 @@ export default {
       this.formData.hostname = this.data[index].hostname
       this.formData.instance_id = this.data[index].instance_id
       this.formData.type = this.data[index].type
+      this.formData.instance_name = this.data[index].instance_name
+      this.formData.os_name = this.data[index].os_name
+      this.formData.cpu = this.data[index].cpu
+      this.formData.memory = this.data[index].memory
+      this.formData.private_ip = this.data[index].private_ip
+      this.formData.public_ip = this.data[index].public_ip
       this.updateId = this.data[index].id
     }
   }

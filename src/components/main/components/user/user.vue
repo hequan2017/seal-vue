@@ -1,14 +1,16 @@
 <template>
   <div class="user-avatar-dropdown">
     <Dropdown @on-click="handleClick">
-      <Badge :dot="!!messageUnreadCount">
-        <Avatar :src="userAvatar"/>
-      </Badge>
-      <Icon :size="18" type="md-arrow-dropdown"></Icon>
+      <!-- <Badge :dot="!!messageUnreadCount"> -->
+      <Avatar :src="userAvatar" />
+      <!-- </Badge> -->
+      <Icon :size="18"
+            type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
-        <DropdownItem name="message">
-          消息中心<Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
-        </DropdownItem>
+        <!-- <DropdownItem name="message">
+          消息中心<Badge style="margin-left: 10px"
+                 :count="messageUnreadCount"></Badge>
+        </DropdownItem> -->
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
@@ -23,11 +25,7 @@ export default {
   props: {
     userAvatar: {
       type: String,
-      default: ''
-    },
-    messageUnreadCount: {
-      type: Number,
-      default: 0
+      default: 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png'
     }
   },
   methods: {
@@ -42,9 +40,7 @@ export default {
       })
     },
     message () {
-      this.$router.push({
-        name: 'message_page'
-      })
+
     },
     handleClick (name) {
       switch (name) {

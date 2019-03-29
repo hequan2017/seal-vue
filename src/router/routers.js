@@ -40,6 +40,7 @@ export default [
         path: 'ecs',
         name: 'ecs',
         meta: {
+          access: ['assets.view_ecs'],
           icon: 'md-funnel',
           title: 'ecs'
         },
