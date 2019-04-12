@@ -11,7 +11,7 @@
         <Button @click="search"
                 type="primary">搜索</Button>&nbsp;
         <Button @click="clear_search"
-                type="warning">清空搜索</Button>
+                type="warning">刷新</Button>
       </Row>
       <br>
       <Row>
@@ -237,7 +237,22 @@ export default {
                   }
                 }
               }, '编辑'),
-              h('Button', {
+              h('Poptip', {
+                props: {
+                  confirm: true,
+                  title: '确定要删除吗！',
+                  transfer: true
+                },
+                style: {
+                  marginRight: '5px',
+                  display: (this.deleteAccessAll !== true) ? 'none' : 'inline-block'
+                },
+                on: {
+                  'on-ok': () => {
+                    this.remove(params.index, params.row.id)
+                  }
+                }
+              }, [h('Button', {
                 props: {
                   type: 'error',
                   size: 'small'
@@ -245,13 +260,8 @@ export default {
                 style: {
                   marginRight: '5px',
                   display: (this.deleteAccessAll !== true) ? 'none' : 'inline-block'
-                },
-                on: {
-                  click: () => {
-                    this.remove(params.index, params.row.id)
-                  }
                 }
-              }, '删除')
+              }, '删除')])
             ])
           }
         }
@@ -295,12 +305,6 @@ export default {
         os_name: [
           { required: false, message: '', trigger: 'blur' }
         ],
-        // cpu: [
-        //   { required: false, message: '', trigger: 'blur' }
-        // ],
-        // memory: [
-        //   { required: false, message: '', trigger: 'blur' }
-        // ],
         private_ip: [
           { required: false, message: '', trigger: 'blur' }
         ],
@@ -363,6 +367,8 @@ export default {
             createEcs(this.formData).then(res => {
               console.log(res)
               this.$Message.success('创建ecs 成功!')
+              this.get_ecs_list()
+              this.create = false
             }).catch(err => {
               console.log(err.response)
               this.$Message.error({
@@ -376,6 +382,7 @@ export default {
             updateEcs(this.updateId, this.formData).then(res => {
               console.log(res)
               this.$Message.success('更新 ecs 成功!')
+              this.get_ecs_list()
               this.create = false
             }).catch(err => {
               console.log(err.response)
@@ -392,6 +399,7 @@ export default {
       })
     },
     add () {
+      this.updateId = null
       this.formData.hostname = ''
       this.formData.type = '阿里云'
       this.formData.instance_id = ''
