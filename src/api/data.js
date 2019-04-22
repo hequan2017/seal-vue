@@ -14,3 +14,10 @@ export const saveErrorLogger = info => {
     method: 'post'
   })
 }
+
+export const getMockMenuData = () => {
+  return axios.request({
+    url: 'system/mock_menu',
+    method: 'post'
+  })
+}

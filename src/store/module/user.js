@@ -1,6 +1,6 @@
 import { login, logout, getUserInfo } from '@/api/user'
-import { setToken, getToken } from '@/libs/util'
-
+import { setToken, getToken, localSave } from '@/libs/util'
+import { initRouter } from '@/libs/router-util' // ①新增  引入动态菜单渲染
 export default {
   state: {
     userName: '',
@@ -45,6 +45,8 @@ export default {
           .then(res => {
             const data = res.data
             commit('setToken', data.token)
+            console.log('token', getToken())
+            initRouter()
             resolve()
           })
           .catch(err => {
@@ -60,6 +62,7 @@ export default {
             console.log('退出', res)
             commit('setToken', '')
             commit('setAccess', [])
+            localSave('dynamicRouter', []) // 存储路由到localStorage
             resolve()
           })
           .catch(err => {

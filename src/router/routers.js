@@ -1,5 +1,5 @@
 import Main from '@/components/main'
-import parentView from '@/components/parent-view'
+import { dynamicRouterAdd } from '@/libs/router-util' // ①添 引入加载菜单
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -16,8 +16,8 @@ import parentView from '@/components/parent-view'
  *  beforeCloseName: (-) 设置该字段，则在关闭当前tab页时会去'@/router/before-close.js'里寻找该字段名对应的方法，作为关闭前的钩子函数
  * }
  */
-
-export default [
+// 不作为Main组件的子页面展示的页面单独写
+export const otherRouter = [
   {
     path: '/login',
     name: 'login',
@@ -28,35 +28,17 @@ export default [
     component: () => import('@/view/login/login.vue')
   },
   {
-    path: '/assets',
-    name: 'assets',
+    path: '/401',
+    name: 'error_401',
     meta: {
-      icon: 'md-menu',
-      title: '资产管理'
+      hideInMenu: true
     },
-    component: Main,
-    children: [
-      {
-        path: 'ecs',
-        name: 'ecs',
-        meta: {
-          access: ['assets.view_ecs'],
-          icon: 'md-funnel',
-          title: 'ecs'
-        },
-        component: () => import('@/view/assets/ecs/ecs-list.vue')
-      },
-      {
-        path: 'level_2_3',
-        name: 'level_2_3',
-        meta: {
-          icon: 'md-funnel',
-          title: '其他'
-        },
-        component: () => import('@/view/multilevel/level-2-3.vue')
-      }
-    ]
-  },
+    component: () => import('@/view/error-page/401.vue')
+  }
+]
+
+// 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在mainRouter里
+export const mainRouter = [
   {
     path: '/',
     name: '_home',
@@ -79,91 +61,13 @@ export default [
         component: () => import('@/view/single-page/home')
       }
     ]
-  },
-  {
-    path: '/multilevel',
-    name: 'multilevel',
-    meta: {
-      icon: 'md-menu',
-      title: '多级菜单'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'level_2_1',
-        name: 'level_2_1',
-        meta: {
-          icon: 'md-funnel',
-          title: '二级-1'
-        },
-        component: () => import('@/view/multilevel/level-2-1.vue')
-      },
-      {
-        path: 'level_2_2',
-        name: 'level_2_2',
-        meta: {
-          access: ['super_admin'],
-          icon: 'md-funnel',
-          showAlways: true,
-          title: '二级-2'
-        },
-        component: parentView,
-        children: [
-          {
-            path: 'level_2_2_1',
-            name: 'level_2_2_1',
-            meta: {
-              icon: 'md-funnel',
-              title: '三级'
-            },
-            component: () =>
-              import('@/view/multilevel/level-2-2/level-2-2-1.vue')
-          },
-          {
-            path: 'level_2_2_2',
-            name: 'level_2_2_2',
-            meta: {
-              icon: 'md-funnel',
-              title: '三级'
-            },
-            component: () =>
-              import('@/view/multilevel/level-2-2/level-2-2-2.vue')
-          }
-        ]
-      },
-      {
-        path: 'level_2_3',
-        name: 'level_2_3',
-        meta: {
-          icon: 'md-funnel',
-          title: '二级-3'
-        },
-        component: () => import('@/view/multilevel/level-2-3.vue')
-      }
-    ]
-  },
-  {
-    path: '/401',
-    name: 'error_401',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/401.vue')
-  },
-  {
-    path: '/500',
-    name: 'error_500',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/500.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/404.vue')
   }
 ]
+
+// 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
+export const appRouter = [...dynamicRouterAdd()]
+
+export const routes = [...otherRouter, ...mainRouter, ...appRouter]
+
+// 所有上面定义的路由都要写在下面输出
+export default routes
