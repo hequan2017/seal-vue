@@ -17,7 +17,7 @@ export const saveErrorLogger = info => {
 
 export const getMockMenuData = () => {
   return axios.request({
-    url: 'system/mock_menu',
+    url: 'system/menu',
     method: 'post'
   })
 }

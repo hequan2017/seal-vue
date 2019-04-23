@@ -45,7 +45,6 @@ export default {
           .then(res => {
             const data = res.data
             commit('setToken', data.token)
-            console.log('token', getToken())
             initRouter()
             resolve()
           })

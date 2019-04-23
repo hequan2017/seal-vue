@@ -16,9 +16,8 @@ const _import = require('@/router/_import_' + process.env.NODE_ENV)
 var gotRouter
 // 初始化路由
 export const initRouter = () => {
-  console.log('开始初始化路由')
+  console.log('----------------开始初始化路由--------------------')
   if (!getToken()) {
-    console.log('没有获取到token')
     return
   }
   //  异步请求
@@ -34,7 +33,6 @@ export const initRouter = () => {
   if (!gotRouter) {
     getMockMenuData().then(res => {
       routerData = res.data // 后台拿到路由
-      console.log('保存到本地', routerData)
       localSave('dynamicRouter', JSON.stringify(routerData)) // 存储路由到localStorage
       gotRouter = filterAsyncRouter(routerData) // 过滤路由,路由组件转换
       store.commit('updateMenuList', gotRouter)
