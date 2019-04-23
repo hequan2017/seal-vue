@@ -13,7 +13,7 @@ import {
 } from '@/libs/util'
 import { saveErrorLogger } from '@/api/data'
 import router from '@/router'
-import routers from '@/router/routers'
+// import routers from '@/router/routers'
 import config from '@/config'
 const { homeName } = config
 
@@ -37,7 +37,7 @@ export default {
   },
   getters: {
     menuList: (state, getters, rootState) =>
-      getMenuByRouter(routers, rootState.user.access),
+      getMenuByRouter(state.menuList, rootState.user.access),
     errorCount: state => state.errorList.length
   },
   mutations: {

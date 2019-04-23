@@ -3,8 +3,7 @@
  * @@新增 定义初始化菜单
  */
 // import axios from 'axios'
-// import { getToken, localSave, localRead } from '@/libs/util'
-import { localSave, localRead } from '@/libs/util'
+import { getToken, localSave, localRead } from '@/libs/util'
 // import config from '@/config'
 import { lazyLoadingCop } from '@/libs/tools'
 import { getMockMenuData } from '@/api/data'
@@ -18,10 +17,10 @@ var gotRouter
 // 初始化路由
 export const initRouter = () => {
   console.log('开始初始化路由')
-  // if (!getToken()) {
-  //   console.log('没有获取到token')
-  //   return
-  // }
+  if (!getToken()) {
+    console.log('没有获取到token')
+    return
+  }
   //  异步请求
   /*  axios.get(baseUrl+'/menuList',{
     header:{'Authorization':getToken()}

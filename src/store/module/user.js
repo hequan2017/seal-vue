@@ -62,7 +62,7 @@ export default {
             console.log('退出', res)
             commit('setToken', '')
             commit('setAccess', [])
-            localSave('dynamicRouter', []) // 存储路由到localStorage
+            localSave('dynamicRouter', []) // 清空本地路由
             resolve()
           })
           .catch(err => {
