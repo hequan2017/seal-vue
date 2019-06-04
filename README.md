@@ -10,6 +10,10 @@
 
 ## DEMO
 
+> http://129.28.156.219:8004/home
+
+> 账户 admin 密码 1qaz.2wsx
+
 ![demo1](src/assets/demo/demo1.jpg)
 ![demo2](src/assets/demo/demo2.jpg)
 
