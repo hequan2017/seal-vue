@@ -28,7 +28,8 @@ git clone https://github.com/hequan2017/seal
 
 src/config/index.js
 baseUrl:
-    dev:
+    dev: 测试
+    pro: 线上
 
 
 // install dependencies
@@ -39,6 +40,8 @@ npm run dev
 ```
 
 ## Build
+
+> 打包 dist
 
 ```bush
 npm run build
