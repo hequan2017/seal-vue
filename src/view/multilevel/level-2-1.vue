@@ -1,8 +1,14 @@
 <template>
-  <div>多级菜单 -> 二级-1</div>
+  <div>
+    {{ name }}
+  </div>
 </template>
 <script>
 export default {
-  name: 'level_2_1'
+  data () {
+    return {
+      name: '测试'
+    }
+  }
 }
 </script>

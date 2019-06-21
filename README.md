@@ -16,6 +16,7 @@
 
 ![demo1](src/assets/demo/demo1.jpg)
 ![demo2](src/assets/demo/demo2.jpg)
+![demo3](src/assets/demo/demo3.jpg)
 
 ## Getting started
 

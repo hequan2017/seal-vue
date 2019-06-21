@@ -16,6 +16,7 @@ import TreeTable from 'tree-table-vue'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import { initRouter } from '@/libs/router-util' // ①新增  引入动态菜单渲染
+import 'xterm/dist/xterm.css'
 // 实际打包时应该不引入mock
 /* eslint-disable */
 if (process.env.NODE_ENV !== 'production') require('@/mock')
