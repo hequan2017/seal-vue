@@ -15,12 +15,12 @@
 
 seal is a Django-based development platform template that supports both monolithic (server-rendered) and separated front-end/back-end modes. seal-vue is its API-driven front-end: menus are delivered dynamically by the back-end after login, and it ships with an asset management (ECS) CRUD page plus a K8s Pod WebSSH web terminal. It also works as a reference template for building ops/admin UIs with Vue + iView.
 
-## ✨ Features
+## �?Features
 
 - Login: obtains a token from the back-end `/api/token` endpoint, stores it in a Cookie, supports logout
 - Dynamic menus: after login, menu data is fetched from the back-end `system/menu` endpoint and routes/sidebar are generated dynamically
 - Asset management: list / create / edit / delete for ECS assets (backed by `/assets/api/ecs`)
-- K8s Pod WebSSH: xterm.js + WebSocket terminal in the browser — enter a pod name and namespace to connect (`/ws/{pod}/{namespace}`)
+- K8s Pod WebSSH: xterm.js + WebSocket terminal in the browser �?enter a pod name and namespace to connect (`/ws/{pod}/{namespace}`)
 - Full iview-admin 2.5.0 framework capabilities out of the box: multi-tab pages, breadcrumbs, permission directives, error log collection, etc.
 
 ## 🛠 Tech Stack
@@ -51,7 +51,7 @@ npm run build
 
 ## 📸 Demo
 
-> DEMO: <http://129.28.156.219:8004/home> (account admin / password 1qaz.2wsx)
+> DEMO: <http://129.28.156.219:8004/home> (account admin / password REDACTED_PASSWORD)
 
 ![demo1](src/assets/demo/demo1.jpg)
 ![demo2](src/assets/demo/demo2.jpg)

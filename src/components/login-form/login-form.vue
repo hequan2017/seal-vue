@@ -8,7 +8,7 @@
       </Input>
     </FormItem>
     <FormItem prop="password">
-      <Input type="password" v-model="form.password" placeholder="请输入密码">
+      <Input type="password" v-model="form.password" placeholder="请输入密�?>
         <span slot="prepend">
           <Icon :size="14" type="md-lock"></Icon>
         </span>
@@ -44,7 +44,7 @@ export default {
     return {
       form: {
         userName: 'admin',
-        password: '1qaz.2wsx'
+        password: 'REDACTED_PASSWORD'
       }
     }
   },
